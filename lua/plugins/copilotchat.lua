@@ -11,7 +11,7 @@ return {
         ------------------------------------------------------------------
         SpeedCpp17 = {
           prompt = [[
-Refactor this for speed for C++-17.
+Refactor the code in #selection for speed for C++-17.
 
 Constraints:
 - Use C++17 only.
@@ -36,7 +36,7 @@ Explain what was improved and why.
         ------------------------------------------------------------------
         ModernizeSTL = {
           prompt = [[
-Modernize this code using idiomatic C++17 STL.
+Modernize the code in #selection using idiomatic C++17 STL.
 
 - Prefer algorithms over manual loops.
 - Use structured bindings.
@@ -56,7 +56,7 @@ Explain each modernization choice briefly.
         ------------------------------------------------------------------
         MemoryAudit = {
           prompt = [[
-Perform a memory efficiency audit of this C++17 code.
+Perform a memory efficiency audit of the C++17 code in #selection.
 
 Check for:
 - Unnecessary copies
@@ -77,7 +77,7 @@ Rewrite improved code and explain improvements.
         ------------------------------------------------------------------
         ThreadSafety = {
           prompt = [[
-Analyze this C++17 code for thread-safety.
+Analyze the C++17 code in the #selection for thread-safety.
 
 Check for:
 - Data races
@@ -98,7 +98,7 @@ Explain changes clearly.
         ------------------------------------------------------------------
         NoexceptConst = {
           prompt = [[
-Improve const-correctness and noexcept usage in this C++17 code.
+Improve const-correctness and noexcept usage in the C++17 code in the #selection.
 
 - Mark methods const where applicable.
 - Add noexcept where safe.
@@ -115,7 +115,7 @@ Provide the improved version and explain decisions.
         ------------------------------------------------------------------
         CleanAPI = {
           prompt = [[
-Refactor this C++17 API for clarity and maintainability.
+Refactor the C++17 API in the #selection for clarity and maintainability.
 
 - Improve naming
 - Reduce duplication
@@ -130,14 +130,53 @@ Explain structural improvements.
           description = "Clean up API design",
         },
       },
+      mappings = {
+        accept_diff = { normal = "ga", insert = "ga" },
+      },
     },
     keys = {
-      { "<leader>ar", "<cmd>CopilotChat SpeedCpp17<cr>", mode = "v", desc = "Refactor for speed" },
-      { "<leader>am", "<cmd>CopilotChat ModernizeSTL<cr>", mode = "v", desc = "Modernize STL" },
-      { "<leader>aM", "<cmd>CopilotChat MemoryAudit<cr>", mode = "v", desc = "Memory audit" },
-      { "<leader>at", "<cmd>CopilotChat ThreadSafety<cr>", mode = "v", desc = "Thread safety audit" },
-      { "<leader>an", "<cmd>CopilotChat NoexceptConst<cr>", mode = "v", desc = "Improve noexcept/const" },
-      { "<leader>ac", "<cmd>CopilotChat CleanAPI<cr>", mode = "v", desc = "Clean API" },
-    }
+      { "<leader>ar",
+        function()
+          require("CopilotChat").ask("/SpeedCpp17", {
+            selection = require("CopilotChat.select").visual,
+          })
+        end,
+        mode = "v", desc = "Refactor for speed" },
+      { "<leader>am",
+        function()
+          require("CopilotChat").ask("/MondernizeSTL", {
+            selection = require("CopilotChat.select").visual,
+          })
+        end,
+        mode = "v", desc = "Modernize STL" },
+      { "<leader>aM",
+        function()
+          require("CopilotChat").ask("/MemoryAudit", {
+            selection = require("CopilotChat.select").visual,
+          })
+        end,
+        mode = "v", desc = "Memory audit" },
+      { "<leader>at",
+        function()
+          require("CopilotChat").ask("/ThreadSafety", {
+            selection = require("CopilotChat.select").visual,
+          })
+        end,
+        mode = "v", desc = "Thread safety audit" },
+      { "<leader>an",
+        function()
+          require("CopilotChat").ask("/NoexceptConst", {
+            selection = require("CopilotChat.select").visual,
+          })
+        end,
+        mode = "v", desc = "Improve noexcept/const" },
+      { "<leader>ac",
+        function()
+          require("CopilotChat").ask("/CleanAPI", {
+            selection = require("CopilotChat.select").visual,
+          })
+        end,
+        mode = "v", desc = "Clean API" },
+    },
   },
 }
