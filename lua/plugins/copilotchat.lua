@@ -1,0 +1,143 @@
+return {
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    opts = {
+      model = "gpt-5.3-codex",  -- 👈 set your preferred model here
+
+      prompts = {
+
+        ------------------------------------------------------------------
+        -- 1. High-performance refactor
+        ------------------------------------------------------------------
+        SpeedCpp17 = {
+          prompt = [[
+Refactor this for speed for C++-17.
+
+Constraints:
+- Use C++17 only.
+- Avoid unnecessary allocations and copies.
+- Prefer move semantics.
+- Use std::string_view where appropriate.
+- Reserve container capacity when beneficial.
+- Prefer emplace over insert/push when meaningful.
+- Reduce temporaries.
+- Mark functions noexcept if safe.
+- Keep code readable and maintainable.
+- Add comments when appropriate to explain non-obvious optimizations.
+- Add comments when appropriate to explain complex logic.
+
+Explain what was improved and why.
+]],
+          description = "Refactor for speed (C++17)",
+        },
+
+        ------------------------------------------------------------------
+        -- 2. STL modernization
+        ------------------------------------------------------------------
+        ModernizeSTL = {
+          prompt = [[
+Modernize this code using idiomatic C++17 STL.
+
+- Prefer algorithms over manual loops.
+- Use structured bindings.
+- Replace raw loops with std::transform, std::find_if, std::accumulate, etc.
+- Use auto appropriately.
+- Remove raw pointers if possible.
+- Prefer RAII patterns.
+- Improve const-correctness.
+
+Explain each modernization choice briefly.
+]],
+          description = "Modernize to idiomatic C++17",
+        },
+
+        ------------------------------------------------------------------
+        -- 3. Memory optimization audit
+        ------------------------------------------------------------------
+        MemoryAudit = {
+          prompt = [[
+Perform a memory efficiency audit of this C++17 code.
+
+Check for:
+- Unnecessary copies
+- Missing move operations
+- Missing reserve() on containers
+- Overuse of std::string instead of std::string_view
+- Inefficient parameter passing
+- Opportunities for constexpr
+- Avoidable heap allocations
+
+Rewrite improved code and explain improvements.
+]],
+          description = "Memory efficiency audit",
+        },
+
+        ------------------------------------------------------------------
+        -- 4. Thread safety audit
+        ------------------------------------------------------------------
+        ThreadSafety = {
+          prompt = [[
+Analyze this C++17 code for thread-safety.
+
+Check for:
+- Data races
+- Missing const correctness
+- Shared mutable state
+- Unsafe static variables
+- Need for std::mutex / std::lock_guard
+- Atomic opportunities
+
+If necessary, refactor to make it thread-safe.
+Explain changes clearly.
+]],
+          description = "Thread-safety audit",
+        },
+
+        ------------------------------------------------------------------
+        -- 5. noexcept & const correctness
+        ------------------------------------------------------------------
+        NoexceptConst = {
+          prompt = [[
+Improve const-correctness and noexcept usage in this C++17 code.
+
+- Mark methods const where applicable.
+- Add noexcept where safe.
+- Ensure exception guarantees are clear.
+- Improve function signatures.
+
+Provide the improved version and explain decisions.
+]],
+          description = "Improve noexcept + const correctness",
+        },
+
+        ------------------------------------------------------------------
+        -- 6. API cleanup
+        ------------------------------------------------------------------
+        CleanAPI = {
+          prompt = [[
+Refactor this C++17 API for clarity and maintainability.
+
+- Improve naming
+- Reduce duplication
+- Improve encapsulation
+- Prefer expressive types
+- Remove unnecessary public surface
+- Simplify logic
+- Improve readability
+
+Explain structural improvements.
+]],
+          description = "Clean up API design",
+        },
+      },
+    },
+    keys = {
+      { "<leader>ar", "<cmd>CopilotChat SpeedCpp17<cr>", mode = "v", desc = "Refactor for speed" },
+      { "<leader>am", "<cmd>CopilotChat ModernizeSTL<cr>", mode = "v", desc = "Modernize STL" },
+      { "<leader>aM", "<cmd>CopilotChat MemoryAudit<cr>", mode = "v", desc = "Memory audit" },
+      { "<leader>at", "<cmd>CopilotChat ThreadSafety<cr>", mode = "v", desc = "Thread safety audit" },
+      { "<leader>an", "<cmd>CopilotChat NoexceptConst<cr>", mode = "v", desc = "Improve noexcept/const" },
+      { "<leader>ac", "<cmd>CopilotChat CleanAPI<cr>", mode = "v", desc = "Clean API" },
+    }
+  },
+}
