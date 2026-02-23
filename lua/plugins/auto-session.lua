@@ -15,6 +15,7 @@ return {
   opts = {
     suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
     auto_save = true,
+    args_allow_files_auto_save = true,
     -- log_level = 'debug',
   },
 }
